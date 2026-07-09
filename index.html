@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mustafa Kutlu, PhD — Research, Projects &amp; Publications</title>
+<meta name="description" content="Associate Professor of Mechatronic Engineering. Research in biomechatronics, explainable AI, chaos theory, soft robotics, iterative learning control, and functional electrical stimulation. Interactive project demos, supervision, and publications." />
+<meta name="author" content="Mustafa Kutlu" />
+<meta name="keywords" content="Mustafa Kutlu, biomechatronics, explainable AI, chaos theory, soft robotics, iterative learning control, functional electrical stimulation, control systems" />
+<meta property="og:title" content="Mustafa Kutlu, PhD — Research, Projects & Publications" />
+<meta property="og:description" content="Interactive research demos, supervision, publications, and teaching." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0a0f1c;--ink-2:#0e1526;--panel:#121b30;--panel-2:#16203a;
+    --line:#233150;--line-soft:#1b2740;--fg:#e8ecf4;--fg-dim:#9fb0cc;--fg-mute:#6b7d9c;
+    --signal:#57d6c4;--signal-dim:#2f8a7f;--amber:#e8a54b;--violet:#9b8cff;--rose:#e57d84;
+    --radius:14px;--maxw:1160px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ink);color:var(--fg);font-family:"Inter",system-ui,sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:600;letter-spacing:-0.01em;line-height:1.12;margin:0}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--signal);display:inline-flex;align-items:center;gap:.6em}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--signal);opacity:.6}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+  nav.scrolled{background:rgba(10,15,28,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:.98rem;letter-spacing:.02em}
+  .brand b{color:var(--signal);font-weight:600}
+  .nav-links{display:flex;gap:4px}
+  .nav-links a{font-size:.8rem;color:var(--fg-dim);padding:8px 11px;border-radius:8px;transition:.2s}
+  .nav-links a:hover{color:var(--fg);background:var(--panel)}
+  .nav-links a.active{color:var(--signal)}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:8px 10px;cursor:pointer}
+  @media(max-width:900px){
+    .nav-links{position:fixed;inset:60px 0 auto 0;flex-direction:column;gap:0;background:rgba(10,15,28,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:8px;transform:translateY(-140%);transition:transform .35s}
+    .nav-links.open{transform:translateY(0)}
+    .nav-links a{padding:14px}
+    .nav-toggle{display:block}
+  }
+
+  header.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+  #attractor{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.9}
+  .hero-fade{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 78% 30%,transparent 0%,rgba(10,15,28,.35) 45%,var(--ink) 88%)}
+  .hero-inner{position:relative;z-index:2;width:100%;padding-top:60px}
+  .hero-inner .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .hero-copy h1{font-size:clamp(2.4rem,6vw,4.4rem);margin:.5rem 0 .2rem}
+  .hero-copy h1 .phd{font-size:.4em;font-weight:400;color:var(--signal);vertical-align:middle;margin-left:.4em;letter-spacing:.02em}
+  .hero-copy .role{font-size:clamp(1.05rem,2.2vw,1.4rem);color:var(--fg);font-family:"Space Grotesk",sans-serif;font-weight:400}
+  .hero-copy .role b{color:var(--amber);font-weight:500}
+  .affil{margin:18px 0 0;color:var(--fg-dim);font-size:.95rem}
+  .affil span{display:block}
+  .hero-bio{margin:22px 0 26px;color:var(--fg-dim);max-width:46ch;font-size:.98rem}
+  .cta-row{display:flex;flex-wrap:wrap;gap:10px}
+  .btn{display:inline-flex;align-items:center;gap:.5em;font-size:.85rem;font-weight:500;padding:11px 16px;border-radius:10px;border:1px solid var(--line);color:var(--fg);background:var(--panel);transition:.2s;cursor:pointer}
+  .btn:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-2px)}
+  .btn.primary{background:var(--signal);color:#04201c;border-color:var(--signal);font-weight:600}
+  .btn.primary:hover{background:#6fe6d5;color:#04201c;transform:translateY(-2px)}
+  .btn svg{width:15px;height:15px}
+  .stat-card{background:rgba(18,27,48,.62);border:1px solid var(--line);border-radius:var(--radius);backdrop-filter:blur(6px);padding:22px}
+  .stat-card h3{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-mute);font-family:"JetBrains Mono",monospace;font-weight:400;margin-bottom:14px}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .stat .n{font-family:"Space Grotesk",sans-serif;font-size:1.9rem;font-weight:600;color:var(--signal);line-height:1}
+  .stat .l{font-size:.76rem;color:var(--fg-dim);margin-top:4px}
+  @media(max-width:900px){.hero-inner .wrap{grid-template-columns:1fr;gap:28px}.stat-card{order:2}#attractor{opacity:.55}}
+
+  section{padding:96px 0;position:relative}
+  section.alt{background:var(--ink-2)}
+  .sec-head{max-width:660px;margin-bottom:44px}
+  .sec-head h2{font-size:clamp(1.7rem,4vw,2.5rem);margin:14px 0 10px}
+  .sec-head p{color:var(--fg-dim);margin:0}
+
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+  .chip{font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.04em;padding:7px 13px;border-radius:999px;border:1px solid var(--line);color:var(--fg-dim);background:transparent;cursor:pointer;transition:.2s}
+  .chip:hover{border-color:var(--signal);color:var(--fg)}
+  .chip.active{background:var(--signal);color:#04201c;border-color:var(--signal);font-weight:500}
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+  .proj{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s,box-shadow .25s;overflow:hidden}
+  .proj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,var(--signal));opacity:.85;transition:width .25s}
+  .proj:hover{transform:translateY(-4px);border-color:var(--accent,var(--signal));box-shadow:0 18px 40px -22px rgba(0,0,0,.7)}
+  .proj:hover::before{width:5px}
+  .proj-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+  .proj-name{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.1rem}
+  .lang{font-family:"JetBrains Mono",monospace;font-size:.68rem;color:var(--fg-mute);border:1px solid var(--line);padding:3px 8px;border-radius:6px;white-space:nowrap}
+  .proj-desc{color:var(--fg-dim);font-size:.9rem;margin:0 0 16px;flex:1}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.03em;color:var(--accent,var(--signal));background:color-mix(in srgb,var(--accent,var(--signal)) 12%,transparent);padding:3px 8px;border-radius:5px}
+  .proj-links{display:flex;gap:8px;margin-top:auto}
+  .plink{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:.45em;font-size:.8rem;font-weight:500;padding:9px;border-radius:9px;border:1px solid var(--line);transition:.2s;color:var(--fg)}
+  .plink svg{width:14px;height:14px}
+  .plink.demo{background:var(--accent,var(--signal));color:#04201c;border-color:var(--accent,var(--signal));font-weight:600}
+  .plink.demo:hover{filter:brightness(1.12)}
+  .plink.code:hover{border-color:var(--fg-dim);color:var(--fg)}
+  .updated{font-family:"JetBrains Mono",monospace;font-size:.66rem;color:var(--fg-mute);margin-top:12px}
+
+  .theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .theme{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:.25s}
+  .theme:hover{transform:translateY(-3px);border-color:var(--tc,var(--signal))}
+  .theme .ic{font-size:1.6rem;margin-bottom:12px;display:block}
+  .theme h3{font-size:1.08rem;margin-bottom:6px}
+  .theme .yr{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--tc,var(--signal));margin-bottom:10px;display:block}
+  .theme p{color:var(--fg-dim);font-size:.88rem;margin:0}
+
+  /* Supervision */
+  .stu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .stu{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:.25s;position:relative}
+  .stu:hover{transform:translateY(-3px);border-color:var(--signal)}
+  .stu-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+  .stu-name{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.12rem}
+  .deg{font-family:"JetBrains Mono",monospace;font-size:.66rem;color:var(--signal);border:1px solid color-mix(in srgb,var(--signal) 45%,transparent);padding:3px 8px;border-radius:6px;white-space:nowrap}
+  .stu-thesis{color:var(--fg);font-size:.92rem;font-style:italic;margin:10px 0 8px}
+  .stu-focus{color:var(--fg-mute);font-size:.82rem;margin:0}
+  .stu-note{font-family:"JetBrains Mono",monospace;font-size:.64rem;color:var(--fg-mute);margin-top:10px;opacity:.75}
+  .msc-note{margin-top:22px;color:var(--fg-dim);font-size:.9rem;border-left:2px solid var(--line);padding-left:16px}
+
+  .pub-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+  .yeargroup{margin-bottom:26px}
+  .yeargroup>.yr{font-family:"Space Grotesk",sans-serif;font-size:1.4rem;font-weight:600;color:var(--fg);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .yeargroup>.yr::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+  .pub{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 18px;border:1px solid var(--line-soft);border-radius:12px;background:var(--panel);margin-bottom:10px;transition:.2s}
+  .pub:hover{border-color:var(--line);background:var(--panel-2)}
+  .pub .dot{width:9px;height:9px;border-radius:50%;margin-top:8px;background:var(--pc,var(--signal))}
+  .pub .t{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:1rem;color:var(--fg)}
+  .pub .a{color:var(--fg-dim);font-size:.85rem;margin-top:3px}
+  .pub .v{color:var(--fg-mute);font-size:.82rem;margin-top:3px;font-style:italic}
+  .pub .hl{display:inline-block;margin-top:8px;font-family:"JetBrains Mono",monospace;font-size:.66rem;color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 40%,transparent);padding:2px 8px;border-radius:5px}
+
+  .conf-list{display:grid;gap:8px}
+  .conf{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:start;padding:14px 16px;border-radius:11px;border:1px solid var(--line-soft);background:var(--panel);transition:.2s}
+  .conf:hover{border-color:var(--line)}
+  .conf .cy{font-family:"JetBrains Mono",monospace;color:var(--signal);font-size:.9rem;padding-top:2px}
+  .conf .ct{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:.96rem}
+  .conf .cv{color:var(--fg-mute);font-size:.82rem;margin-top:2px}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  @media(max-width:900px){.two-col{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .card h3{font-size:1.15rem;margin-bottom:18px;display:flex;align-items:center;gap:.5em}
+  .lvl{margin-bottom:18px}
+  .lvl h4{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--signal);margin:0 0 8px;font-weight:500}
+  .course-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .course{font-size:.8rem;color:var(--fg-dim);border:1px solid var(--line-soft);padding:5px 10px;border-radius:7px}
+  .grant{padding:16px 0;border-bottom:1px solid var(--line-soft)}
+  .grant:last-child{border-bottom:none}
+  .grant .gtop{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+  .grant .gt{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:.92rem}
+  .grant .gy{font-family:"JetBrains Mono",monospace;color:var(--amber);font-size:.82rem;white-space:nowrap}
+  .grant .gm{color:var(--fg-mute);font-size:.8rem;margin-top:4px}
+  .grant .code{font-family:"JetBrains Mono",monospace;color:var(--fg-dim)}
+  .grant .role{color:var(--signal)}
+  .grant .status{font-family:"JetBrains Mono",monospace;font-size:.66rem;padding:2px 7px;border-radius:5px;margin-left:6px}
+  .grant .status.ongoing{color:var(--signal);border:1px solid color-mix(in srgb,var(--signal) 40%,transparent)}
+  .grant .status.done{color:var(--fg-mute);border:1px solid var(--line)}
+  .grant .rel{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .grant .rel a{font-family:"JetBrains Mono",monospace;font-size:.66rem;color:var(--violet);border:1px solid color-mix(in srgb,var(--violet) 35%,transparent);padding:3px 8px;border-radius:6px;transition:.2s}
+  .grant .rel a:hover{background:color-mix(in srgb,var(--violet) 16%,transparent)}
+  .grant .rel a::before{content:"▸ ";opacity:.7}
+
+  footer{padding:56px 0 40px;border-top:1px solid var(--line-soft);background:var(--ink-2)}
+  .foot-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
+  .foot-links{display:flex;gap:8px;flex-wrap:wrap}
+  .foot-links a{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;color:var(--fg-dim);transition:.2s}
+  .foot-links a:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-2px)}
+  .foot-links a svg{width:18px;height:18px}
+  .copy{color:var(--fg-mute);font-size:.82rem}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">M. <b>Kutlu</b></a>
+    <div class="nav-links" id="navlinks">
+      <a href="#projects">Projects</a>
+      <a href="#themes">Research</a>
+      <a href="#students">Supervision</a>
+      <a href="#papers">Publications</a>
+      <a href="#conferences">Conferences</a>
+      <a href="#teaching">Teaching</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="attractor"></canvas>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <div class="wrap">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Mechatronics · Control · Explainable AI</span>
+        <h1>Mustafa Kutlu<span class="phd">PhD</span></h1>
+        <p class="role">Associate Professor of <b>Mechatronic Engineering</b></p>
+        <p class="affil">
+          <span>Sakarya University of Applied Sciences, Turkey</span>
+          <span>Military Technological College, Muscat, Oman</span>
+        </p>
+        <p class="hero-bio">Building interpretable control systems at the intersection of dynamics, rehabilitation robotics, and machine learning — from FES-based stroke therapy to chaos-informed swarms. The demos below run live in your browser.</p>
+        <div class="cta-row">
+          <a href="#projects" class="btn primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"/></svg>
+            Explore live demos
+          </a>
+          <a href="https://github.com/mechkutlu1" target="_blank" rel="noopener" class="btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.4.5 0 5.9 0 12.5c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0024 12.5C24 5.9 18.6.5 12 .5z"/></svg>
+            @mechkutlu1
+          </a>
+          <a href="mailto:mustafa.kutlu@mtc.edu.om" class="btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+      <div class="stat-card reveal">
+        <h3>At a glance</h3>
+        <div class="stat-grid">
+          <div class="stat"><div class="n">20</div><div class="l">Interactive apps</div></div>
+          <div class="stat"><div class="n">30+</div><div class="l">Publications</div></div>
+          <div class="stat"><div class="n">3</div><div class="l">PhD completions</div></div>
+          <div class="stat"><div class="n">6</div><div class="l">Research themes</div></div>
+        </div>
+        <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--fg-dim)">
+          <div class="mono" style="font-size:.72rem;color:var(--fg-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Education</div>
+          PhD — University of Southampton, 2017<br/>BSc — Gazi University, 2011
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Interactive Gallery</span>
+      <h2>Live project demos</h2>
+      <p>Single-page apps deployed straight from GitHub. Each opens live in the browser — filter by area, or jump to the source.</p>
+    </div>
+    <div class="filters reveal" id="projFilters"></div>
+    <div class="proj-grid" id="projGrid"></div>
+  </div>
+</section>
+
+<section id="themes" class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Research Programme</span>
+      <h2>Six connected threads</h2>
+      <p>A decade of work linking control theory, interpretable machine learning, and biomedical engineering.</p>
+    </div>
+    <div class="theme-grid" id="themeGrid"></div>
+  </div>
+</section>
+
+<section id="students">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Supervision</span>
+      <h2>Doctoral graduates</h2>
+      <p>Primary PhD supervision at Sakarya University of Applied Sciences, alongside around twelve completed MSc theses since 2020.</p>
+    </div>
+    <div class="stu-grid" id="stuGrid"></div>
+    <p class="msc-note reveal">In addition to the doctoral graduates above, Dr Kutlu has supervised approximately twelve MSc theses since 2020 across rehabilitation robotics, soft robotics, explainable AI, and control systems.</p>
+  </div>
+</section>
+
+<section id="papers" class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Selected Journal Articles</span>
+      <h2>Publications</h2>
+      <p>Peer-reviewed articles across biomechatronics, XAI, chaos theory, control, and deep learning.</p>
+    </div>
+    <div class="pub-filters reveal" id="pubFilters"></div>
+    <div id="pubList"></div>
+  </div>
+</section>
+
+<section id="conferences">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Proceedings</span>
+      <h2>Conference papers</h2>
+      <p>Recent presentations at IEEE, IFAC, and international robotics venues.</p>
+    </div>
+    <div class="conf-list" id="confList"></div>
+  </div>
+</section>
+
+<section id="teaching" class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Education &amp; Funding</span>
+      <h2>Teaching &amp; grants</h2>
+      <p>Modules taught across undergraduate and graduate levels, and funded research programmes with linked demos.</p>
+    </div>
+    <div class="two-col reveal">
+      <div class="card">
+        <h3>📚 Teaching</h3>
+        <div id="teachList"></div>
+      </div>
+      <div class="card">
+        <h3>💷 Research grants</h3>
+        <div id="grantList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>
+      <div class="brand" style="font-size:1.1rem;margin-bottom:6px">M. <b>Kutlu</b></div>
+      <div class="copy">Mechatronic Engineering · Control · Explainable AI<br/>Sakarya · Muscat</div>
+    </div>
+    <div class="foot-links">
+      <a href="https://github.com/mechkutlu1" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.4.5 0 5.9 0 12.5c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0024 12.5C24 5.9 18.6.5 12 .5z"/></svg></a>
+      <a href="mailto:mustafa.kutlu@mtc.edu.om" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+      <a href="https://orcid.org/0000-0003-1663-2523" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zM7.4 18.4H5.5V7.6h1.9v10.8zM6.4 6.3a1.1 1.1 0 110-2.3 1.1 1.1 0 010 2.3zm12.1 12.1h-1.9v-5.3c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.4H10.8V7.6h1.8v1.5h.1c.3-.5 1-1.1 2.2-1.1 2.3 0 2.8 1.5 2.8 3.5v6.9z"/></svg></a>
+      <a href="https://www.researchgate.net/profile/Mustafa_Kutlu" target="_blank" rel="noopener" aria-label="ResearchGate" title="ResearchGate"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 0H4.4A4.4 4.4 0 000 4.4v15.2A4.4 4.4 0 004.4 24h15.2a4.4 4.4 0 004.4-4.4V4.4A4.4 4.4 0 0019.6 0zM8.3 15.5c-1.2 0-2-.4-2.6-1.1V15H4.1V6.5h1.7v3.3c.5-.7 1.4-1.1 2.5-1.1 1.9 0 3.2 1.4 3.2 3.4s-1.3 3.4-3.2 3.4zm-.3-5.3c-1 0-1.7.8-1.7 1.9s.7 1.9 1.7 1.9 1.7-.8 1.7-1.9-.7-1.9-1.7-1.9zm9.6-3.7c0 .9-.6 1.5-1.5 1.5s-1.5-.6-1.5-1.5.6-1.5 1.5-1.5 1.5.7 1.5 1.5z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const GH_USER="mechkutlu1";
+
+/* ---------- PROJECTS (newest first) ---------- */
+const REPOS=[
+ {name:"automated_warehouse",lang:"HTML",accent:"#57d6c4",
+  desc:"Interactive demonstrator for the Development of an automated robot-assisted sustainable warehouse system through multi-agent deep reinforcement learning algorithms",tags:["Simulation","PWA","Deep Learning"]},
+ {name:"Secure_Comm_Agricultural_Robot",lang:"HTML",accent:"#6B8BAE",
+  desc:"Secure communication platform demo for IoRT-based agricultural and soft-robotic systems — the applied side of the 120E318 project.",tags:["Soft Robotics","IoT","Security"]},
+ {name:"soft_robotic",lang:"HTML",accent:"#6B8BAE",
+  desc:"Soft-robotics playground exploring pneumatic artificial muscles and compliant grippers with live actuation parameters.",tags:["Soft Robotics"]},
+ {name:"koopman-lift",lang:"HTML",accent:"#9b8cff",
+  desc:"Koopman-operator lifting — build linear predictors from nonlinear dynamics and watch the data-driven model track the true system.",tags:["Control","Data-Driven","Dynamics"]},
+ {name:"fold_inkblot",lang:"HTML",accent:"#e8a54b",
+  desc:"Generative symmetry explorer producing folded, inkblot-style patterns — a visual study in reflection and reaction-diffusion.",tags:["Generative","Dynamics"]},
+ {name:"bond_graph",lang:"HTML",accent:"#57d6c4",
+  desc:"Bond-graph modelling tool for energy-based, multi-domain system dynamics — assemble elements and read off the state equations.",tags:["Modelling","Control","Teaching"]},
+ {name:"swaytrack",lang:"JavaScript",accent:"#57d6c4",
+  desc:"Postural-sway tracking and mobile posturography from webcam pose estimation — the demo companion to the DEBAP balance project.",tags:["Deep Learning","Balance","Health","PWA"]},
+ {name:"chaos_mixer_lab",lang:"HTML",accent:"#9b8cff",
+  desc:"Chaotic-mixing laboratory simulating a double-cone tumbler and a magnetic stirrer, quantifying mixing quality under chaotic forcing.",tags:["Chaos","Mixing","Simulation"]},
+ {name:"SaaS",lang:"HTML",accent:"#e8a54b",
+  desc:"Soldier-as-a-System interactive systems-engineering demo, linking subsystem models into one operational picture.",tags:["Systems Engineering","Simulation"]},
+ {name:"optoelectronics",lang:"HTML",accent:"#9b8cff",
+  desc:"Interactive optoelectronic device and biosensor modelling with explainable-AI surrogates over the response curves.",tags:["Devices","XAI"]},
+ {name:"circuit_analysis",lang:"HTML",accent:"#57d6c4",
+  desc:"Circuit-analysis teaching tool — build a network, solve it, and watch node voltages and currents update instantly.",tags:["Teaching","Electronics"]},
+ {name:"swarm_form",lang:"HTML",accent:"#57d6c4",
+  desc:"Swarm formation sandbox — six controller families and four chaotic guidance fields with live parameter tuning.",tags:["Swarm","Control","Chaos"]},
+ {name:"control_demo",lang:"HTML",accent:"#9b8cff",
+  desc:"Control Design Playground — three plant models paired with four controller families, all tunable in real time.",tags:["Control","Teaching"]},
+ {name:"XAI",lang:"JavaScript",accent:"#57d6c4",
+  desc:"Explainable-AI test app demonstrating SHAP and LIME attribution on a biomedical risk model.",tags:["XAI","ML"]},
+ {name:"Nonlinear_Dynamics",lang:"HTML",accent:"#e8a54b",
+  desc:"Nonlinear-dynamics explorer — phase portraits, bifurcation sweeps, and chaotic attractors you can steer by hand.",tags:["Chaos","Dynamics"]},
+ {name:"FES",lang:"HTML",accent:"#e57d84",
+  desc:"Functional electrical stimulation demo — electrode-array selectivity and stimulation mapping for upper-limb rehabilitation.",tags:["Rehab","FES","Control"]},
+ {name:"gym-score",lang:"JavaScript",accent:"#e8a54b",
+  desc:"RepScore — MediaPipe-based exercise monitoring PWA that counts and scores repetitions from the webcam.",tags:["Deep Learning","PWA","Health"]},
+ {name:"suture-grader",lang:"HTML",accent:"#e57d84",
+  desc:"Suture-training grader — deep-learning scoring of suture quality for surgical skills practice.",tags:["Deep Learning","Medical"]},
+ {name:"Dome",lang:"HTML",accent:"#9b8cff",
+  desc:"Dome — interactive situational-awareness and monitoring console driven by a live simulation scenario.",tags:["Control","Simulation"]},
+ {name:"fasting",lang:"HTML",accent:"#57d6c4",
+  desc:"Intermittent-fasting tracker PWA with explainable-AI insights over your logged fasting windows.",tags:["XAI","PWA","Health"]},
+];
+
+const THEMES=[
+ {ic:"🦾",name:"Biomechatronics & Rehabilitation",years:"2012–2026",color:"#C2956A",desc:"FES-based upper-limb stroke rehabilitation systems (GOSAIL, GOSAIL+, GOSAIL C) combining advanced control with low-cost sensing."},
+ {ic:"🧠",name:"Explainable AI",years:"2022–2026",color:"#7B9E6B",desc:"SHAP and LIME for biomedical decision support — diabetes risk, hypertension, thyroid-cancer recurrence, and anemia detection."},
+ {ic:"🌀",name:"Chaos Theory & Applications",years:"2018–2026",color:"#9b8cff",desc:"Chaotic equations for robotic mixing, megastable and memcapacitor-based oscillators, and chaos-based image encryption."},
+ {ic:"🤖",name:"Soft Robotics",years:"2020–2025",color:"#6B8BAE",desc:"Pneumatic artificial muscles, soft pick-and-place grippers, silicone production via chaotic mixing, and bioinspired agricultural robots."},
+ {ic:"🔄",name:"Iterative Learning Control",years:"2012–2025",color:"#e57d84",desc:"Advanced ILC for multi-muscle FES in stroke rehabilitation, combining electrode arrays with innovative control strategies."},
+ {ic:"👁",name:"Deep Learning & Computer Vision",years:"2019–2026",color:"#57d6c4",desc:"CNNs for kidney segmentation, anemia and suture scoring, balance detection, and prohibited-object detection in X-ray images."},
+];
+
+/* ---------- SUPERVISION ---------- */
+const STUDENTS=[
+ {name:"Türker Berk Dönmez",deg:"PhD · 2025",
+  thesis:"Evaluation of the Effects of Clinical Laboratory Findings on Chronic Diseases Using Explainable Artificial Intelligence Techniques",
+  focus:"Explainable AI for chronic-disease risk from clinical and laboratory data (SHAP, LIME, quantum-enhanced ML)."},
+ {name:"Mert Süleyman Demirsoy",deg:"PhD · 2025",
+  thesis:"Design and production of a new magnetic stirring device to increase mixing performance with chaos based speed and position control",
+  focus:"Chaos-based control of magnetic stirrers and ILC/IoT rehabilitation devices."},
+ {name:"Mohammed Mansour",deg:"PhD · 2024",
+  thesis:"Development and control of lower limb active orthosis for athlete rehabilitation",
+  focus:"AI, robotics, biomechatronics and medical imaging; now Assistant Professor at Sakarya."},
+];
+
+const TC={biomechatronics:"#C2956A",xai:"#7B9E6B",chaos:"#9b8cff","soft-robotics":"#6B8BAE",ilc:"#e57d84","deep-learning":"#57d6c4"};
+const TL={biomechatronics:"Biomechatronics",xai:"Explainable AI",chaos:"Chaos",ilc:"ILC","deep-learning":"Deep Learning","soft-robotics":"Soft Robotics"};
+
+const PUBS=[
+ {year:2026,t:"Prohibited Object Detection Utilizing Faster R-CNN in X-Ray Images",a:"R. Köker, O. Sorgun, M. Kutlu, M. Demir",v:"Tehnički vjesnik, 31(1), 173–180",theme:"deep-learning"},
+ {year:2026,t:"Rapid Estimation of Elbow Joint Moment and Triceps Force During Triceps Dumbbell Kickback",a:"M. Mansour, M. Kutlu",v:"Politeknik Dergisi, Advance Online",theme:"biomechatronics"},
+ {year:2026,t:"Genetic Algorithm-Optimized Mamdani Fuzzy Logic Control for Robust Quadrotor Trajectory Tracking",a:"M. Mansour, M. Kutlu",v:"Mechatron. Intell. Transp. Syst., 5(2), 103-114",theme:"ilc"},
+ {year:2025,t:"Enhancing Stirring Performance Through Chaotic Position Control in a Magnetic Stirrer",a:"M. S. Demirsoy, M. S. Sarıkaya, S. Kurnaz, Y. H. El Naser, et al., M. Kutlu, G. Hazar",v:"J. Brazilian Soc. Mech. Sci. Eng., 47(11), 580",theme:"chaos"},
+ {year:2025,t:"Goal-Oriented Balance Rehabilitation System for Balance Disorder",a:"O. Simsek, M. Kutlu",v:"Medical Engineering & Physics",theme:"biomechatronics",hl:"Key rehabilitation system"},
+ {year:2025,t:"Predicting Thyroid Cancer Recurrence Using Supervised CatBoost: A SHAP-Based Explainable AI Approach",a:"A. A. Hanani, T. B. Donmez, M. Kutlu, M. Mansour",v:"Medicine, 104(22), e42667",theme:"xai"},
+ {year:2025,t:"Explainable Quantum-Enhanced Machine Learning for Hypertension Prediction",a:"T. B. Donmez, M. Kutlu",v:"Eur. Phys. J. Special Topics, 1-13",theme:"xai"},
+ {year:2025,t:"Chaos-Based Engineering Applications and Finite Element Analysis with a 6D Chaotic System",a:"A. Akgul, Y. H. El Naser, M. Kutlu, O. K. Stephen",v:"Modern Physics Letters B, 2550167",theme:"chaos"},
+ {year:2025,t:"Explainable AI in Action: A Comparative Analysis of Hypertension Risk Factors Using SHAP and LIME",a:"T. B. Donmez, M. Kutlu, M. Mansour, M. Z. Yildiz",v:"Neural Computing and Applications, 37(5), 4053-4074",theme:"xai"},
+ {year:2024,t:"Development of an Active Orthosis and IoT Application for Lower Extremity",a:"E. Yılmaz, M. S. Demirsoy, M. S. Sarıkaya, M. Kutlu",v:"J. Smart Systems Research, 5(2), 91-100",theme:"biomechatronics"},
+ {year:2024,t:"Towards Transparent Control Systems: The Role of Explainable AI in Iterative Learning Control",a:"M. Kutlu, M. Mansour",v:"Düzce Univ. Bilim ve Teknoloji Dergisi, 12(4), 2370-2386",theme:"ilc"},
+ {year:2024,t:"Machine Learning Interpretability in Diabetes Risk Assessment: A SHAP Analysis",a:"M. Kutlu, T. B. Donmez, C. Freeman",v:"Computers and Electronics in Medicine, 1(1), 34-44",theme:"xai"},
+ {year:2024,t:"A Low-Cost Soft Gripper for Automated Pick-and-Place Systems",a:"M. S. Demirsoy, M. E. Atalay, A. Bilurdagi, M. Kutlu",v:"J. Smart Systems Research, 5(1), 33-39",theme:"soft-robotics"},
+ {year:2024,t:"Development of Elbow Rehabilitation Device with ILC and IoT",a:"M. S. Demirsoy, Y. H. El Naser, M. S. Sarıkaya, N. Y. Peker, M. Kutlu",v:"Turkish J. Engineering, 8(2), 370-379",theme:"biomechatronics"},
+ {year:2024,t:"3D Chaotic Mixing Application for Polymer Production",a:"D. Yagmur, M. Kutlu",v:"Physica Scripta, 99(4), 045210",theme:"chaos"},
+ {year:2023,t:"Non-Invasive Detection of Anemia Using Lip Mucosa Transfer Learning CNNs",a:"S. Mahmud, M. Mansour, T. Donmez, M. Kutlu, C. Freeman",v:"Frontiers in Big Data",theme:"deep-learning"},
+ {year:2023,t:"Estimation of Lower Limb Joint Moments Based on Inverse Dynamics: A Comparison of ML Algorithms",a:"M. Mansour, K. Serbest, M. Kutlu, M. Cilli",v:"Medical & Biological Eng. & Computing",theme:"biomechatronics"},
+ {year:2023,t:"Self-Adaptive Methods for Learning Rate Parameter of Q-Learning Algorithm",a:"M. Cimen, Z. Garip, Y. Yalcın, M. Kutlu, A. F. Boz",v:"J. Intelligent Systems: Theory and Applications",theme:"xai"},
+ {year:2023,t:"An Application for Suture Training with Deep Learning Techniques",a:"S. Mahmud, E. Cumak, M. Kutlu",v:"Surgery Open Science",theme:"deep-learning"},
+ {year:2023,t:"Respiratory Diseases Prediction from a New Chaotic Equation",a:"M. Mansour, T. Donmez, M. Kutlu, C. Freeman",v:"Chaos Theory and Applications",theme:"chaos"},
+ {year:2023,t:"Kidney Segmentations Using CNN Models",a:"M. Mansour, M. S. Demirsoy, M. Kutlu",v:"J. Smart Systems Research",theme:"deep-learning"},
+ {year:2022,t:"Comparison of Gesture Classification Methods with Contact and Non-Contact Sensors for HCI",a:"K. Erin, M. Kutlu, B. Boru",v:"Sigma J. Eng. and Natural Sciences, 40(2), 219-226",theme:"deep-learning"},
+ {year:2021,t:"Conceptual Design of EMG Based Upper Limb Power Assist Rehabilitation Device",a:"M. Mansour, M. Kutlu",v:"J. Smart Systems Research, 2(1), 1-17",theme:"biomechatronics"},
+ {year:2021,t:"Development and Control of a Home-Based Training Device for Hand Rehabilitation",a:"K. Serbest, M. Kutlu, O. Eldogan, I. Tekeoglu",v:"Biomedical Engineering / Biomedizinische Technik",theme:"biomechatronics"},
+ {year:2021,t:"Development of Micro Computer Based Mobile Random Number Generator with Engineering Application",a:"A. Akgul, B. Gurevin, I. Pehlivan, M. Yildiz, M. Kutlu, E. Guleryuz",v:"Integration (VLSI Journal)",theme:"chaos"},
+ {year:2017,t:"Functional Electrical Stimulation for Home-Based Upper-Limb Stroke Rehabilitation",a:"M. Kutlu, C. T. Freeman, M. Spraggs",v:"Current Directions in Biomedical Engineering, 3(1), 25-29",theme:"biomechatronics"},
+ {year:2016,t:"Feedback Control of Electrical Stimulation Electrode Arrays",a:"C. T. Freeman, K. Yang, J. Tudor, M. Kutlu",v:"Medical Engineering and Physics, 38(11), 1185-1194",theme:"ilc"},
+ {year:2016,t:"Upper-Limb Stroke Rehabilitation Using Electrode Array Based FES with Sensing and Control Innovations",a:"M. Kutlu, C. T. Freeman, E. Hallewell, A-M. Hughes, D. S. Laila",v:"Medical Engineering and Physics, 38(4), 366-379",theme:"ilc"},
+ {year:2014,t:"The Application of Precisely Controlled FES to Shoulder, Elbow and Wrist for Upper Limb Stroke Rehabilitation",a:"K. L. Meadmore, T. Exell, E. Hallewell, A-M. Hughes, M. Kutlu, et al., C. T. Freeman",v:"J. NeuroEngineering and Rehabilitation, 11(105)",theme:"biomechatronics",hl:"Key feasibility study"},
+];
+
+const CONFS=[
+ {y:2026,t:"An Explainable Physics-Informed Dual-Input Deep Learning Framework for Robust Partial Discharge Detection",v:"F. P. Mohamed, M. Kutlu, S. Mahmud, W. H. Siew · IEEE Electrical Insulation Conference (EIC)"},
+ {y:2026,t:"Enhancing Anomaly Detection in Autonomous Systems with Explainable AI",v:"A. Alan, M. Kutlu, R. Skaik, M. Almarshoud · J. Physics: Conf. Series, Vol. 3191"},
+ {y:2026,t:"Explainable AI for Composite Laminate Design: SHAP-Based Insights on Buckling Performance",v:"M. F. Shahab, M. Kutlu, M. M. Ahmed · J. Physics: Conf. Series, Vol. 3191"},
+ {y:2025,t:"Interpretable Inverse Reinforcement Learning for Nonlinear Pendulum Control",v:"S. Mahmud, F. P. Mohamed, M. Kutlu · 13th ICCMA, IEEE, pp. 656-661"},
+ {y:2025,t:"Iterative Impedance Learning Control with Explainable AI",v:"M. Kutlu, S. Mahmud, C. Freeman · IFAC Conference on Robotics"},
+ {y:2025,t:"Optimizing Multi-Agent System Swarm Performance Through Explainable AI",v:"S. Mahmud, M. Kutlu, A. T. Alan · 11th ICMRE, IEEE, pp. 175-180"},
+ {y:2024,t:"An Explainable AI Based Model Predictive Control Approach",v:"S. Mahmud, M. Kutlu · 12th ICCMA, IEEE, pp. 280-286"},
+ {y:2023,t:"Deep Q-Learning Enhanced Iterative Learning Control",v:"M. Kutlu · 3rd ICSAR"},
+ {y:2017,t:"A Home-Based FES System for Upper-Limb Stroke Rehabilitation with Iterative Learning Control",v:"M. Kutlu, C. T. Freeman, E. Hallewell, A-M. Hughes, M. Spraggs · IFAC World Congress, Toulouse"},
+ {y:2015,t:"FES-Based Upper-Limb Stroke Rehabilitation with Advanced Sensing and Control",v:"M. Kutlu, C. T. Freeman, E. Hallewell, A-M. Hughes, D. S. Laila · ICORR, Singapore"},
+ {y:2013,t:"Upper Limb Stroke Rehabilitation Using FES Mediated by Iterative Learning Control",v:"K. Meadmore, T. Exell, E. Hallewell, C. T. Freeman, A-M. Hughes, M. Kutlu, et al. · ICORR, Seattle"},
+];
+
+const TEACHING=[
+ {level:"Undergraduate",courses:["Instrumentation and Control","Engineering Mathematics","Applied Engineering Systems","Autonomous Control","Circuit Analysis","Multidisciplinary Project","Introduction to Programming","Biomechatronics"]},
+ {level:"Graduate",courses:["System Dynamics and Instrumentation","Nonlinear Systems","Biomedical Control","Analytical Methods"]},
+];
+
+/* ---------- GRANTS (with codes + linked repos) ---------- */
+const GRANTS=[
+ {year:"2025–2027",code:"TÜBİTAK 3501 · 124E832",status:"ongoing",
+  title:"DEBAP: Deep-Learning-Based Balance Detection and Mobile Posturography Application",
+  funder:"TÜBİTAK (Career)",amount:"750,000 TL",role:"Researcher",repos:["swaytrack"]},
+ {year:"2024–2025",code:"TÜBİTAK 1002 · 124M843",status:"done",
+  title:"IoT-Integrated Magnetic Stirrer with Chaos-Based Speed and Position Control: Design and Manufacturing",
+  funder:"TÜBİTAK (Rapid Support)",amount:"",role:"Advisor",repos:["chaos_mixer_lab"]},
+ {year:"2024",code:"",status:"done",
+  title:"Automated Robot-Assisted Sustainable Warehouse Systems",
+  funder:"The Research Council of Oman",amount:"19,950 OMR",role:"Co-I",repos:["automated_warehouse"]},
+ {year:"2022–2025",code:"TÜBİTAK 1001 · 122M619",status:"done",
+  title:"Development of a Pneumatic Artificial Muscle-Based Upper-Extremity Manipulator and Soft Robotic Gripper",
+  funder:"TÜBİTAK",amount:"600,000 TL",role:"Researcher",repos:["soft_robotic"]},
+ {year:"2023",code:"",status:"done",
+  title:"Increasing Biogas Production Using a Chaotic-Based Mixer",
+  funder:"Turkish Research Council",amount:"900,000 TL",role:"PI",repos:["chaos_mixer_lab"]},
+ {year:"2021–2023",code:"TÜBİTAK 1001 · 120E318",status:"done",
+  title:"Design and Implementation of a Secure Communication Platform for IoRT-Based Soft Robots",
+  funder:"TÜBİTAK",amount:"500,000 TL",role:"Researcher",repos:["Secure_Comm_Agricultural_Robot"]},
+ {year:"2011",code:"",status:"done",
+  title:"Restoration of Reach and Grasp in Stroke Patients Using FES and Haptic Feedback",
+  funder:"EPSRC",amount:"£464,231",role:"Researcher",repos:["FES"]},
+];
+
+/* ---------- ICONS ---------- */
+const svgPlay='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"/></svg>';
+const svgCode='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>';
+
+/* ---------- RENDER PROJECTS ---------- */
+const projGrid=document.getElementById('projGrid');
+const projFilters=document.getElementById('projFilters');
+const allTags=["All",...Array.from(new Set(REPOS.flatMap(r=>r.tags)))];
+let activeTag="All";
+function renderProjects(){
+  projGrid.innerHTML=REPOS.filter(r=>activeTag==="All"||r.tags.includes(activeTag)).map(r=>`
+    <article class="proj" style="--accent:${r.accent}">
+      <div class="proj-top"><div class="proj-name">${r.name}</div><span class="lang">${r.lang}</span></div>
+      <p class="proj-desc">${r.desc}</p>
+      <div class="proj-tags">${r.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="proj-links">
+        <a class="plink demo" href="https://${GH_USER}.github.io/${r.name}/" target="_blank" rel="noopener">${svgPlay} Live demo</a>
+        <a class="plink code" href="https://github.com/${GH_USER}/${r.name}" target="_blank" rel="noopener">${svgCode} Code</a>
+      </div>
+    </article>`).join('');
+}
+projFilters.innerHTML=allTags.map((t,i)=>`<button class="chip ${i===0?'active':''}" data-tag="${t}">${t}</button>`).join('');
+projFilters.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;activeTag=b.dataset.tag;projFilters.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c===b));renderProjects();});
+renderProjects();
+
+/* ---------- RENDER THEMES ---------- */
+document.getElementById('themeGrid').innerHTML=THEMES.map(t=>`
+  <div class="theme" style="--tc:${t.color}"><span class="ic">${t.ic}</span><h3>${t.name}</h3><span class="yr">${t.years}</span><p>${t.desc}</p></div>`).join('');
+
+/* ---------- RENDER STUDENTS ---------- */
+document.getElementById('stuGrid').innerHTML=STUDENTS.map(s=>`
+  <div class="stu">
+    <div class="stu-top"><div class="stu-name">${s.name}</div><span class="deg">${s.deg}</span></div>
+    <div class="stu-thesis">“${s.thesis}”</div>
+    <p class="stu-focus">${s.focus}</p>
+    ${s.note?`<div class="stu-note">${s.note}</div>`:''}
+  </div>`).join('');
+
+/* ---------- RENDER PUBS ---------- */
+const pubList=document.getElementById('pubList');
+const pubFilters=document.getElementById('pubFilters');
+const pubThemes=["all",...Array.from(new Set(PUBS.map(p=>p.theme)))];
+let activePub="all";
+function renderPubs(){
+  const items=PUBS.filter(p=>activePub==="all"||p.theme===activePub);
+  const byY={};items.forEach(p=>{(byY[p.year]=byY[p.year]||[]).push(p)});
+  pubList.innerHTML=Object.keys(byY).sort((a,b)=>b-a).map(y=>`
+    <div class="yeargroup"><div class="yr">${y}</div>
+      ${byY[y].map(p=>`<div class="pub" style="--pc:${TC[p.theme]||'#57d6c4'}"><div class="dot"></div>
+        <div><div class="t">${p.t}</div><div class="a">${p.a}</div><div class="v">${p.v}</div>${p.hl?`<span class="hl">★ ${p.hl}</span>`:''}</div></div>`).join('')}
+    </div>`).join('');
+}
+pubFilters.innerHTML=pubThemes.map((t,i)=>`<button class="chip ${i===0?'active':''}" data-t="${t}">${t==="all"?"All areas":(TL[t]||t)}</button>`).join('');
+pubFilters.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;activePub=b.dataset.t;pubFilters.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c===b));renderPubs();});
+renderPubs();
+
+/* ---------- RENDER CONFS ---------- */
+document.getElementById('confList').innerHTML=CONFS.map(c=>`
+  <div class="conf"><div class="cy">${c.y}</div><div><div class="ct">${c.t}</div><div class="cv">${c.v}</div></div></div>`).join('');
+
+/* ---------- RENDER TEACHING ---------- */
+document.getElementById('teachList').innerHTML=TEACHING.map(l=>`
+  <div class="lvl"><h4>${l.level}</h4><div class="course-tags">${l.courses.map(c=>`<span class="course">${c}</span>`).join('')}</div></div>`).join('');
+
+/* ---------- RENDER GRANTS ---------- */
+document.getElementById('grantList').innerHTML=GRANTS.map(g=>{
+  const meta=[g.code?`<span class="code">${g.code}</span>`:'',g.funder,g.amount].filter(Boolean).join(' · ');
+  const rel=(g.repos&&g.repos.length)?`<div class="rel">${g.repos.map(r=>`<a href="https://${GH_USER}.github.io/${r}/" target="_blank" rel="noopener">${r}</a>`).join('')}</div>`:'';
+  const st=g.status==="ongoing"?'<span class="status ongoing">Ongoing</span>':'<span class="status done">Completed</span>';
+  return `<div class="grant">
+    <div class="gtop"><div class="gt">${g.title}</div><div class="gy">${g.year}</div></div>
+    <div class="gm">${meta} · <span class="role">${g.role}</span>${st}</div>
+    ${rel}
+  </div>`;
+}).join('');
+
+/* ---------- NAV ---------- */
+const nav=document.getElementById('nav');
+const navLinks=document.getElementById('navlinks');
+document.getElementById('navToggle').addEventListener('click',()=>navLinks.classList.toggle('open'));
+navLinks.addEventListener('click',e=>{if(e.target.tagName==='A')navLinks.classList.remove('open');});
+const sections=[...document.querySelectorAll('section[id]')];
+function onScroll(){nav.classList.toggle('scrolled',window.scrollY>60);let cur='';sections.forEach(s=>{if(s.getBoundingClientRect().top<200)cur=s.id;});navLinks.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ---------- REVEAL ---------- */
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---------- HERO: Aizawa attractor ---------- */
+(function(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas=document.getElementById('attractor');const ctx=canvas.getContext('2d');
+  let W,H,DPR;
+  function resize(){DPR=Math.min(window.devicePixelRatio||1,2);W=canvas.clientWidth;H=canvas.clientHeight;canvas.width=W*DPR;canvas.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
+  resize();window.addEventListener('resize',resize);
+  const a=0.95,b=0.7,c=0.6,d=3.5,e=0.25,f=0.1,dt=0.008;
+  const N=reduce?900:2200;const pts=[];
+  for(let i=0;i<N;i++)pts.push({x:(Math.random()-.5)*0.6,y:(Math.random()-.5)*0.6,z:Math.random()*0.6,life:Math.random()});
+  let angle=0;const colors=['#57d6c4','#9b8cff','#e8a54b'];
+  function step(p){const{x,y,z}=p;const dx=(z-b)*x-d*y;const dy=d*x+(z-b)*y;const dz=c+a*z-(z*z*z)/3-(x*x+y*y)*(1+e*z)+f*z*x*x*x;p.x+=dx*dt;p.y+=dy*dt;p.z+=dz*dt;p.life-=0.0016;if(p.life<=0||Math.abs(p.x)>4||Math.abs(p.y)>4){p.x=(Math.random()-.5)*0.6;p.y=(Math.random()-.5)*0.6;p.z=Math.random()*0.6;p.life=1;}}
+  function draw(){ctx.clearRect(0,0,W,H);if(!reduce)angle+=0.0016;const cx=W*0.66,cy=H*0.5,scale=Math.min(W,H)*0.19;const cosA=Math.cos(angle),sinA=Math.sin(angle);for(let i=0;i<pts.length;i++){const p=pts[i];step(p);const rx=p.x*cosA-p.y*sinA;const rz=p.x*sinA+p.y*cosA;const sx=cx+rx*scale;const sy=cy-(p.z-1.1)*scale+rz*scale*0.12;const depth=(rz+2)/4;ctx.fillStyle=colors[i%3];ctx.globalAlpha=Math.min(p.life,1)*0.5*depth;const r=0.6+depth*1.1;ctx.fillRect(sx,sy,r,r);}ctx.globalAlpha=1;requestAnimationFrame(draw);}
+  if(reduce){for(let k=0;k<400;k++)pts.forEach(step);}
+  draw();
+})();
+</script>
+</body>
+</html>
